@@ -66,8 +66,10 @@ module Stack : STACK =
   struct
     exception EmptyStack
 
-    type 'a stack = 'a      (* replace this with the correct
-                               implementation type *)
+    type 'a stack = 'a list (* We've chosen to implement stacks
+                               internally as lists, a natural
+                               and simple choice *)
+
 
     (* empty -- An empty stack *)
     let empty : 'a stack = []
