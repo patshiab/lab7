@@ -24,29 +24,32 @@ type color_name =
 
 (* to_color r g b -- Returns the color corresponding to the RGB
    values given by r, g, and b *)
-let to_color (r : int) (g : int) (b : int) : color =
-  r lsl 0b10000 + g lsl 0b1000 + b ;;
+   let to_color (r : int) (g : int) (b : int) : color =
+     r, g, b ;;
 
 (* red c -- Returns the red channel value for the color c *)
 let red (c : color) : int =
-  c lsr 0b10000  ;;
+  match c with
+  | (r, _g, _b) -> r ;;
 
 (* green c -- Returns the green channel value for the color c *)
 let green (c : color) : int =
-  (c lsr 0b1000) land 0b11111111 ;;
+  match c with
+  | (_r, g, _b) -> g ;;
 
 (* blue c -- Returns the blue channel value for the color c *)
 let blue (c : color) : int =
-   c land 0b11111111 ;;
+  match c with
+  | (_r, _g, b) -> b ;;
 
 (* color_named name -- Returns the color (as RGB representation)
    corresponding to the color name *)
 let color_named (name : color_name) : color =
   match name with
-  | Red ->    0b111111110000000000000000
-  | Green ->  0b1111111100000000
-  | Blue ->   0b11111111
-  | Orange -> 0b111111111010110100000000
-  | Yellow -> 0b111111111111111000000000
-  | Indigo -> 0b010110110000000010000010
-  | Violet -> 0b111100001000001011110100 ;;
+  | Red ->    to_color 255    0    0
+  | Green ->  to_color   0  255    0
+  | Blue ->   to_color   0    0  255
+  | Orange -> to_color 255  165    0
+  | Yellow -> to_color 255  255    0
+  | Indigo -> to_color  75    0  130
+  | Violet -> to_color 240  130  240
