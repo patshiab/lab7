@@ -25,7 +25,7 @@ type color_name =
 (* to_color r g b -- Returns the color corresponding to the RGB
    values given by r, g, and b *)
    let to_color (r : int) (g : int) (b : int) : color =
-     r, g, b ;;
+     r lsl 0b10000 + g lsl 0b1000 + b ;;
 
 (* red c -- Returns the red channel value for the color c *)
 let red (c : color) : int =
